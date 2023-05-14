@@ -230,7 +230,8 @@ app.get("/register", function (req, res) {
 });
 
 app.post("/register", function (req, res) {
-    var newUser = new User({ username: req.body.username, place: req.body.place, profile: req.body.photo, occupation: req.body.occupation, bio: body.req.bio });
+    console.log(req.body);
+    var newUser = new User({ username: req.body.username, place: req.body.place, profile: req.body.photo, occupation: req.body.occupation, bio: req.body.bio });
     //register this user using passport
     User.register(newUser, req.body.password, function (err, user) {
         if (err) {
