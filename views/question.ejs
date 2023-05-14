@@ -1,0 +1,51 @@
+<% include header %>
+    <div class="container" >
+        <div class="row">
+            <div class="col-md-9">
+                <div class="w3-card answerContainer">
+                        
+                        <h3><%= quest.question %></h3>
+                        <a href="/question/<%= quest._id %>/answers/new" class="btn btn-primary">Answer</a>
+                        <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom w3-right"><i class="fa fa-arrow-circle-up fa-lg " aria-hidden="true"></i>  Upvote</button>
+                </div>
+
+                <div class="well">
+                    
+                    <h3>Answers:</h3>
+                    <% quest.answers.forEach(function(ans){ %>
+                        <div class="thumbnail">
+                            <h5> <strong><%=ans.author%></strong> </h5>
+                            <a class="pull-right" href="/question/<%=ans._id%>/<%=quest._id%>/comments/new">comment</a>
+                            <p><%=ans.answer%></p>
+                            <% if(ans.comments.length !==0) { %>
+                            <div class="well" style="padding-right:20px;">
+                        <%  ans.comments.forEach(function(comment){ %>
+
+                                <p><strong><u><%= comment.author %></u></strong></p>
+                                <p><i class="fa fa-arrow-right" aria-hidden="true"></i> <%= comment.text %></p>
+                                <hr style="border: 1px solid #737373; opacity: 0.5; margin-bottom: 3px;">
+                                <% }) %>
+                            </div>
+                            <% } %>
+                    </div>
+                        <% }) %>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="w3-card" style="padding: 10px; border-radius: 5px;">
+    
+                    <h3>Improve feed</h3>
+                    <ul>
+                        <li>Visit your feed</li>
+                        <li>Follow 20 or more topics</li>
+                        <li>Find your frinds on explorelf</li>
+                        <li>Upvote 2 or more good answers</li>
+                        <li>Ask your first question</li>
+                        <li>Add 3 credentials</li>
+                        <li>Answer a question</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+<% include footer %>

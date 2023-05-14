@@ -1,0 +1,20 @@
+<% include header %>
+    <div class="container">
+        <h3 style="text-align:center;"></h3>
+        <form action="/question/<%= quest._id %>/answers" method="post">
+            <div class="form-group">
+                <input type="hidden" id="defaultValue" class="form-control" name="ans[author]" placeholder="Author">
+            </div>
+            <div class="form-group">
+                <textarea placeholder="Answer" type="text" name="ans[answer]" cols="89" rows="5" style="border: lightgray    1px solid; border-radius: 2px;"></textarea>
+                
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="Submit">
+            </div>
+        </form>
+    </div>
+    <script>
+        var x = document.querySelector("#defaultValue").defaultValue=document.querySelector("#loggedInAs").innerText.slice(13);
+    </script>
+<% include footer %>

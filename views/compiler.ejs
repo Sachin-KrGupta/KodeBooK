@@ -1,0 +1,90 @@
+<% include header %>
+<body>
+    <div class="compiler__container">
+        <div id="editor">
+        </div>
+        <div class="config">
+            <div class="input">
+                <textarea name="input" id="input" cols="1000" rows="10" placeholder="Type your input here"></textarea>
+            </div>
+            <div class="language">
+                <select name="cars" class="language__dropdown">
+                    <option value="CPP">CPP</option>
+                    <option value="C">C</option>
+                    <option value="Java">Java</option>
+                    <option value="Python 3">Python 3</option>
+                    <option value="NodeJS">NodeJS</option>
+                </select>
+            </div>
+        </div>
+        <div class="output">
+            <textarea name="output" id="output" cols="30" rows="10" placeholder="Output is shown here"
+                readonly></textarea>
+        </div>
+    </div>
+    <button id="getCode" style="position: fixed; bottom: 20px;">get code</button>
+
+    <script src="
+  https://cdn.jsdelivr.net/npm/ace-builds@1.18.0/src-min-noconflict/ace.min.js
+  "></script>
+    <script>
+        var editor = ace.edit("editor");
+        editor.resize();
+        editor.setTheme("ace/theme/monokai");
+        editor.session.setMode("ace/mode/c_cpp");
+        let language = 'cpp';
+
+        document.querySelector('.language__dropdown').addEventListener('change', (event) => {
+            language = event.target.value;
+            switch (language) {
+                case 'CPP':
+                    editor.session.setMode("ace/mode/c_cpp");
+                    language = 'cpp';
+                    break;
+                case 'C':
+                    editor.session.setMode("ace/mode/c_cpp");
+                    language = 'c';
+                    break;
+                case 'Java':
+                    editor.session.setMode("ace/mode/java");
+                    language = 'java';
+                    break;
+                case 'Python 3':
+                    editor.session.setMode("ace/mode/python");
+                    language = 'py';
+                    break;
+                case 'NodeJS':
+                    editor.session.setMode("ace/mode/javascript");
+                    language = 'js';
+                    break;
+            }
+        })
+
+
+        document.querySelector("#getCode").addEventListener("click", () => {
+            var code = editor.getValue();
+            const input = document.querySelector("#input").value;
+            console.log(input);
+            fetch('/process', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ code, language, input })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    document.querySelector("#output").value = data.output.length > 0 ? data.output : data.error;
+                    if(data.error){
+                        document.querySelector("#output").style.color = 'red';
+                    }else{
+                        document.querySelector("#output").style.color = 'black';
+                    }
+
+                })
+                .catch(error => console.error(error));
+        });
+    </script>
+</body>
+<% include footer %>

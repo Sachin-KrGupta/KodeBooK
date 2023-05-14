@@ -1,0 +1,115 @@
+body{
+    /* background-color: #fcf9ff; */
+    background-image: url("/back.jpg");
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.navbar{
+    background-color: #ffff;
+    text-align: center;
+    display: flex;
+}
+
+.container{
+    padding-left:100px;
+    padding-right:100px;
+
+
+}
+
+.logo{
+    height:100%;
+}
+
+@media (min-width: 1200px) {
+    .container{
+        width: 1500px;
+    }
+}
+
+.navbar-nav {
+    float: inherit;
+}
+
+.answerContainer {
+    padding: 10px;
+    padding-left: 50px;
+    padding-right: 50px;
+    margin: 10px 0;
+}
+
+.codeSnippet {
+    background-color: rgba(0,0,0,0);
+    text-align: center;
+}
+
+.codeDiv {
+    background-color: rgba(224, 224, 224,1);
+    border-radius: 6px;
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 0.9rem;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+}
+
+.w3-card {
+    background-color: #fff;
+}
+
+.w3-margin {
+    margin-top: 10px !important;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.compiler__container {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+#editor {
+    flex: 5;
+    height: 70%;
+    border-radius: 16px;
+}
+
+.ace_content {
+    position: relative;
+    height: 100% !important;
+}
+
+.config {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+}
+
+#input, #output {
+    width: 100%;
+}
+
+.output {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex: 3;
+}
+
+
+#output {
+    height: 50%;
+    color: red;
+}
+

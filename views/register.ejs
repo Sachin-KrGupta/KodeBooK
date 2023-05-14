@@ -1,0 +1,90 @@
+<% include header %>
+
+<div class="container">
+    <h1 style="text-align: center;">Sign up!</h1>
+    <br>
+
+    <hr style="border-bottom  : 2px solid black;">
+  <form action="/register" method="POST">
+    <div class="col-md-4"></div>
+
+    <div class="row">
+      <div class="form-group mx-sm-3 col-md-3">
+      <label for="username">Username:</label>
+      <input class="form-control" type="text" name="username" placeholder="username" value="">
+      </div>
+    </div>
+    <div class="col-md-4"></div>
+    <div class="row">
+      <div class="form-group mx-sm-3 col-md-3">
+        <label for="password">Password:</label>
+        <input class="form-control" type="password" name="password" placeholder="password" value="">
+      </div>
+    </div>
+    <div class="col-md-4"></div>
+    <div class="row">
+      <div class="form-group mx-sm-3 col-md-3">
+        <label for="place">Place</label>
+        <input class="form-control" type="text" name="place" placeholder="Place" value="">
+      </div>
+    </div>
+    <div class="col-md-4"></div>
+    <div class="row">
+      <div class="form-group mx-sm-3 col-md-3">
+        <label for="occupation">Place</label>
+        <input class="form-control" type="text" name="occupation" placeholder="Student/Work" value="">
+      </div>
+    </div>
+    
+    <div class="col-md-4"></div>
+    <div class="row">
+      <div class="form-group mx-sm-3 col-md-3">
+        <label for="About">About Yourself</label>
+        <input class="form-control" type="text" name="bio" placeholder="Student/Work" value="">
+      </div>
+    </div>
+
+    <div class="col-md-4"></div>
+    <div class="row">
+      <div class="form-group mx-sm-3 col-md-3">
+        <label for="photo">File</label>
+        <input id="inp" type="file" >
+        <input type="hidden" id="b64" name="photo">
+      </div>
+    </div>
+    <div class="col-md-4"></div>
+
+    
+    </div>
+
+    <div class="form-group col-md-6">
+  
+      <button type="submit" class="btn btn-primary">Sign Up</button>
+    </div>
+  </form>
+</div>
+  
+
+<script>
+  function readFile() {
+  if (this.files && this.files[0]) {
+    var FR= new FileReader();
+    
+    FR.addEventListener("load", function(e) {
+      document.getElementById("b64").setAttribute("value", e.target.result);
+    }); 
+    
+    FR.readAsDataURL( this.files[0] );
+  }
+  
+}
+
+document.getElementById("inp").addEventListener("change", readFile);
+</script>
+
+<!-- <form class="" action="/register" method="post">
+  <input type="text" name="username" placeholder="username">
+  <input type="password" name="password" placeholder="password">
+  <button type="submit" name="button">Sign up</button>
+</form> -->
+<% include footer %>

@@ -1,0 +1,141 @@
+<% include header %> 
+<body>  
+  <div class="container">
+    <div class="row">
+        <div class="col-sm-3">    
+          
+          <div class="w3-card w3-round">
+            <div class="w3-card w3-round w3-white">
+              <div class="w3-container">
+                <h4 class="w3-center">My Profile</h4>
+                
+                <%  if(currentUser){ %>
+
+                <p class="w3-center"><img src="<%= currentUser.profile %>" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
+                <p class="w3-text-theme" style="text-align: center; font-size: 14px; font-style: italic;"><%= currentUser.bio %></p>
+                <hr>
+                <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i><%= currentUser.username %></p>
+                <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i><%= currentUser.place %></p>
+                <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-text-theme" aria-hidden="true"></i><%= currentUser.occupation %></p>
+                <%  }else{  %>
+                <p class="w3-center"><img src="/avatar.jpg" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
+                <hr>
+                <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i>No User Found</p>
+                <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i>No User Found</p>
+                <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i>No User Found</p>
+                <%  }  %>
+                
+                
+              </div>
+            </div>
+                
+          </div>
+            <br>
+            <a style="text-decoration: none;" href="/myQuestion">
+              Accordion
+              <div class="w3-card w3-round">
+                <div class="w3-white">
+                  <button class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-circle-o-notch fa-fw w3-margin-right"></i> My Posts</button>
+                  <div id="Demo1" class="w3-hide w3-container">
+                    <p>Some text..</p>
+                  </div>
+                </div>
+              </div>      
+            </a>
+            <br>
+            Filter
+            <input type="text" class="w3-input" id="myInput" onkeyup="myFunction()" placeholder="Search for Category" title="Type in a name">
+            <br>
+            <!-- Interests --> 
+            <div class="w3-card w3-round w3-white w3-hide-small">
+              <div class="w3-container">
+                <p>Proficiency</p>
+                <p>
+                  <span class="w3-tag w3-small w3-theme-d5">JavaScript</span>
+                  <span class="w3-tag w3-small w3-theme-d4">C++</span>
+                  <span class="w3-tag w3-small w3-theme-d3">Machine Learning</span>
+                  <span class="w3-tag w3-small w3-theme-d2">Competitive Coding</span>
+                  <span class="w3-tag w3-small w3-theme-d1">AR/VR</span>
+                </p>
+              </div>
+            </div>
+          
+        </div>
+        <div class="col-sm-7">
+          <!-- <div class="row">
+            Posts
+          </div> -->
+          <div class="row">
+            <% questions.forEach(function(quest){ %>
+            <a href="/question/<%= quest._id %>" style="text-decoration: none;">
+              <div class="col-md-12">
+            
+                <div class="w3-container w3-card w3-white w3-round w3-margin toRemove"><br>
+                  <img src="<%= quest.avatar %>" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px; height:60px;">
+                  <span class="w3-right w3-opacity"><%= quest.time %></span>
+                  <h4><%= quest.user %></h4><br>
+                  <p style="margin-top: 0; margin-bottom: 0; color: rgb(105, 102, 102);" >Category: <span class="forSearch"><%= quest.category %></span></p>
+                  <hr class="w3-clear" style="margin-top: 0;">
+                  <a href="/question/<%= quest._id %>" style="text-decoration: none;">
+                  <p style="white-space: pre-wrap; overflow-wrap: break-word;"><%= quest.question %></p>
+                </a>
+                  <% if(quest.code) { %>
+                  <div class="codeDiv"><code class="prettyprint codeSnippet"><%= quest.code %></code></div>
+                  <% } %>
+                  <form action="#" method="POST" style="display: inline">
+                    <input type="hidden" name="id" value="<%= quest.question %>">
+                    <button type="submit" name="likes" class="w3-button w3-theme-d1 w3-margin-bottom " id="like" value="<%= quest.like %>"><i class="fa fa-arrow-circle-up fa-lg " aria-hidden="true"></i> <%= quest.like %>  Upvote</button>
+                  </form>
+                  
+                  <a href="/question/<%=quest._id%>"> 
+                  <button type="button" style="float: right;" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i> <%= quest.answers.length %>  Answer</button> </a>
+              
+                </div>
+              </div> 
+            
+            <% }) %>
+          </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="w3-card" style="padding: 10px; border-radius: 5px;">
+
+                <h3>Improve feed</h3>
+                <ul>
+                    <li>Visit your feed</li>
+                    <li>Follow 20 or more topics</li>
+                    <li>Find your frinds on explorelf</li>
+                    <li>Upvote 2 or more good answers</li>
+                    <li>Ask your first question</li>
+                    <li>Add 3 credentials</li>
+                    <li>Answer a question</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+  </div>
+</body>
+<script>
+  // function disable()
+  // {
+  //   document.querySelector("#like").disabled = true;
+  // }
+
+  function myFunction() {
+    var input, filter, ul, li, a, i, txtValue;
+    input = document.getElementById("myInput");
+    toRem = document.querySelectorAll(".toRemove");
+    filter = input.value.toUpperCase(); 
+    li = document.querySelectorAll(".forSearch");
+    for (i = 0; i < li.length; i++) {
+        a = li[i];
+        txtValue = a.textContent || a.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            toRem[i].style.display = "";
+        } else {
+            toRem[i].style.display = "none";
+        }
+    }
+  }
+
+</script>
+<% include footer %>

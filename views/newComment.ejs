@@ -1,0 +1,20 @@
+<% include header %>
+    <div class="container">
+        <h3 style="text-align:center;">Add Comment</h3>
+
+        <form action="/question/<%= ans._id %>/<%= quesid %>/comments" method="post">
+            <div class="form-group">
+                <input type="hidden" class="form-control" id="defaultValue" name="comment[author]" placeholder="Author">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="comment[text]" placeholder="Text">
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="Submit">
+            </div>
+        </form>
+    </div>
+    <script>
+        var x = document.querySelector("#defaultValue").defaultValue=document.querySelector("#loggedInAs").innerText.slice(13);
+    </script>
+<% include footer %>
