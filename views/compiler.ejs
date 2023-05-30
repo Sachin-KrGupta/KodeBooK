@@ -32,30 +32,30 @@
         editor.resize();
         editor.setTheme("ace/theme/monokai");
         editor.session.setMode("ace/mode/c_cpp");
-        let language = 'cpp';
+        let language = 'c_cpp';
 
         document.querySelector('.language__dropdown').addEventListener('change', (event) => {
             language = event.target.value;
             switch (language) {
                 case 'CPP':
                     editor.session.setMode("ace/mode/c_cpp");
-                    language = 'cpp';
+                    language = 'c_cpp';
                     break;
                 case 'C':
                     editor.session.setMode("ace/mode/c_cpp");
-                    language = 'c';
+                    language = 'c_cpp';
                     break;
                 case 'Java':
                     editor.session.setMode("ace/mode/java");
-                    language = 'java';
+                    language = 'Java';
                     break;
                 case 'Python 3':
                     editor.session.setMode("ace/mode/python");
-                    language = 'py';
+                    language = 'python';
                     break;
                 case 'NodeJS':
                     editor.session.setMode("ace/mode/javascript");
-                    language = 'js';
+                    language = 'nodejs';
                     break;
             }
         })

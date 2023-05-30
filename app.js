@@ -147,18 +147,21 @@ app.get('/ide', (req, res) => {
 
 app.post("/process", async (req, res, next) => {
     let code = req.body.code;
-    let language = req.body.language;
+    let lang = req.body.language;
     let input = req.body.input;
-    var data = qs.stringify({
+    var data = {
         code: code,
-        language: language,
+        lang: lang,
         input: input,
-    });
+    };
     var config = {
         method: "post",
-        url: "https://api.codex.jaagrav.in",
+        url: "https://code-compiler10.p.rapidapi.com/",
         headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
+        'x-compile': 'rapidapi',
+        'Content-Type': 'application/json',
+        'X-RapidAPI-Key': '4d423a0b8amsh9cdb8657ade4f58p185062jsn7d04e99838c6',
+        'X-RapidAPI-Host': 'code-compiler10.p.rapidapi.com',
         },
         data: data,
     };
